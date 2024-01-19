@@ -2,7 +2,7 @@
 
 <a href="https://www.microchip.com" rel="nofollow"><img src="images/microchip.png" alt="MCHP" width="300"/></a>
 
-# Metronome Waveform Generator — Use Case for CLB using the PIC16F13145 Microcontroller with MCC Melody
+# Metronome Waveform Generator — Use Case for CLB Using the PIC16F13145 Microcontroller With MCC Melody
 
 This repository provides an MPLAB® X project for interfacing the Configurable Logic Block (CLB) and a Switec Stepper motor. By the end, you will be able to drive a stepper motor to re-create a metronome using the CLB peripheral.
 
@@ -43,12 +43,12 @@ To program the Curiosity Nano board with this MPLAB X project, follow the steps 
 
 ## Concept
 
-This example demonstrates the capabilities of the CLB, a Core Independent Peripheral (CIP), that can generate the waveforms that drive a Switec Stepper motor as a metronome.
+This example demonstrates the capabilities of the CLB, a Core Independent Peripheral (CIP), that can generate the waveforms that drives a Switec Stepper motor as a metronome.
 
-The signals needed to drive the Switec stepper motor in both directions are shown in image below.
+The signals needed to drive the Switec stepper motor in both directions are shown in the image below.
 <br><img src="images/motor_waveforms.png" width="800">
 
-A complete rotation (360°) of the rotor corresponds to six clock cycles and corresponds to 2° rotation of the shaft because the Switec motor has a gear train with a reduction ratio of 1/180. The generated waveform have a frequency six times lower than the CLB clock frequency.
+A complete rotation (360°) of the rotor corresponds to six clock cycles and to a 2° rotation of the shaft because the Switec motor has a gear train with a reduction ratio of 1/180. The generated waveforms have a frequency six times lower than the CLB clock frequency.
 
 For the counterclockwise movement, the second signal can be derived from the first one by using a one clock delay and a NOT gate. Using the same operations, the third signal can be obtain from the second one.
 <br>
@@ -58,7 +58,7 @@ The signals that drive the motor clockwise can be obtained from the signals that
 
 For the metronome functionality, a 6-bit counter is used to determine the number of steps that the metronome does in each direction. The enable signal is obtained from an AND operation between the first signal and one of the other signals that are chosen using a multiplexor. The most significat bit (MSB) of the counter is used to determine the direction of the bidirectional shift register. Using this implementation the motor will run 32 complete steps in each direction. The result will be that the metronome will have an oscillation of 16 steps in each direction.
 
-The implementation of the counter is shown in the below images.
+The implementation of the counter is shown in the images below.
 <br><img src="images/mcc_clb_6bit_counter.png" width="800">
 <br><img src="images/mcc_clb_t_flip_flop.png" width="800">
 
@@ -77,11 +77,11 @@ When the application starts, the shaft of the motor is set to an initial positio
 <br>
 The frequency of the metronome is set by the clock input of the CLB. The Switec Stepper motor used can run at a frequency between 200 and 600 Hz. This frequency is obtain by using TMR0 overflow as a clock input for the CLB. For this application the frequency is set to 400 Hz.
 
-For the FREE_RUN mode, used to set the initial position, TMR1 is used to count the steps that the motor does in one direction. This functionality is obtain by using TMR0 overflow as a clock input for TMR1, meaning that 6 counts of the TMR1 represents 1 full step of the motor, composed from 6 partial steps.
+For the FREE_RUN mode, used to set the initial position, TMR1 is used to count the steps that the motor does in one direction. This functionality is obtain by using TMR0 overflow as a clock input for TMR1, meaning that six counts of the TMR1 represents one full step of the motor, composed from six partial steps.
 
 <br>
 
-The figure below shows the waveforms that drives the motor in both directions.
+The figure below shows the waveforms that drive the motor in both directions.
 <br><img src="images/waveforms.png" width="800">
 
 ## Setup 
@@ -154,7 +154,7 @@ The following peripheral and clock configurations are set up using MPLAB® Code 
 
 ## Summary
 
-This example demonstrates the capabilities of the CLB, a  CIP that can generate the waveforms that drive a Switec Stepper motor as a metronome.
+This example demonstrates the capabilities of the CLB, a CIP that can generate the waveforms that drive a Switec Stepper motor as a metronome.
 <br>
 
 ##  How to Program the Curiosity Nano Board
