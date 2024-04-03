@@ -50,7 +50,7 @@ The signals needed to drive the Switec stepper motor in both directions are show
 
 A complete rotation (360°) of the rotor corresponds to six clock cycles and to a 2° rotation of the shaft because the Switec motor has a gear train with a reduction ratio of 1/180. The generated waveforms have a frequency six times lower than the CLB clock frequency.
 
-For the counterclockwise movement, the second signal can be derived from the first one by using a one clock delay and a NOT gate. Using the same operations, the third signal can be obtain from the second one.
+For the counterclockwise movement, the second signal can be derived from the first one by using a one clock delay and a NOT gate. Using the same operations, the third signal can be obtained from the second one.
 <br>
 The signals that drive the motor clockwise can be obtained from the signals that drive it counterclockwise, but generated in the opposite direction. This gives us a bidirectional shift register. The figure below shows the implemented solution for waveforms generation.
 
@@ -141,7 +141,7 @@ The following peripheral and clock configurations are set up using MPLAB® Code 
     - CLBPPSOUT0: RB6 (Contact 1)
     - CLBPPSOUT1: RB5 (Contact 2, 3)
     - CLBPPSOUT2: RB4 (Contact 4)
-    - CLBPPSOUT3: RC2 (Used to visualize the signal that change direction)
+    - CLBPPSOUT3: RC2 (Used to visualize the signal that changes the direction)
     <br><img src="images/mcc_pin_grid_view.png" width="600"> 
 
 <br>

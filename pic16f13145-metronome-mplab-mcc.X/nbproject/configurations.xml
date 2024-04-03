@@ -313,8 +313,6 @@
         <property key="memories.programmemory" value="true"/>
         <property key="memories.programmemory.ranges" value="0-1fff"/>
         <property key="poweroptions.powerenable" value="true"/>
-        <property key="programmerToGoFilePath"
-                  value="C:/work/Temp/PIC16F13145/EBE Repo/pic16f13145-metronome-mplab-mcc/pic16f13145-metronome-mplab-mcc.X/debug/free/pic16f13145-metronome-mplab-mcc_ptg"/>
         <property key="programoptions.eraseb4program" value="true"/>
         <property key="programoptions.preservedataflash" value="false"/>
         <property key="programoptions.preservedataflash.ranges"
@@ -562,8 +560,6 @@
         <property key="memories.programmemory" value="true"/>
         <property key="memories.programmemory.ranges" value="0-1fff"/>
         <property key="poweroptions.powerenable" value="true"/>
-        <property key="programmerToGoFilePath"
-                  value="C:/work/Temp/PIC16F13145/EBE Repo/pic16f13145-metronome-mplab-mcc/pic16f13145-metronome-mplab-mcc.X/debug/pro/pic16f13145-metronome-mplab-mcc_ptg"/>
         <property key="programoptions.eraseb4program" value="true"/>
         <property key="programoptions.preservedataflash" value="false"/>
         <property key="programoptions.preservedataflash.ranges"
