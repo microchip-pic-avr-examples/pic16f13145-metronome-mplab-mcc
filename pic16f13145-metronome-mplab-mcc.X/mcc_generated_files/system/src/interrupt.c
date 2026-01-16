@@ -7,11 +7,11 @@
  * 
  * @brief This file contains the API implementation for the Interrupt Manager driver.
  * 
- * @version Interrupt Manager Driver Version 2.0.5
+ * @version Interrupt Manager Driver Version 2.0.6
 */
 
 /*
-© [2024] Microchip Technology Inc. and its subsidiaries.
+© [2026] Microchip Technology Inc. and its subsidiaries.
 
     Subject to your compliance with these terms, you may use Microchip 
     software and any derivatives exclusively with Microchip products. 
@@ -59,15 +59,11 @@ void  INTERRUPT_Initialize (void)
 void __interrupt() INTERRUPT_InterruptManager (void)
 {
     // interrupt handler
-    if(PIE0bits.IOCIE == 1 && PIR0bits.IOCIF == 1)
-    {
-        PIN_MANAGER_IOC();
-    }
-    else if(INTCONbits.PEIE == 1)
+    if(INTCONbits.PEIE == 1)
     {
         if(PIE1bits.TMR1IE == 1 && PIR1bits.TMR1IF == 1)
         {
-            Timer1_OverflowISR();
+            TMR1_OverflowISR();
         } 
         else
         {

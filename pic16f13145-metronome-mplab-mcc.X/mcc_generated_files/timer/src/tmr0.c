@@ -3,14 +3,16 @@
  * 
  * @file tmr0.c
  * 
- * @ingroup tmr0
+ * @ingroup tmr08bit
  * 
  * @brief  Driver implementation for the TMR0 driver
  *
- * @version TMR0 Driver Version 2.1.1
+ * @version TMR0 Driver Version 3.0.0
+ *
+ * @version Package Version 5.1.1
 */
 /*
-© [2024] Microchip Technology Inc. and its subsidiaries.
+© [2026] Microchip Technology Inc. and its subsidiaries.
 
     Subject to your compliance with these terms, you may use Microchip 
     software and any derivatives exclusively with Microchip products. 
@@ -33,94 +35,111 @@
 #include <xc.h>
 #include "../tmr0.h"
 
-
-const struct TMR_INTERFACE Timer0 = {
-    .Initialize = TMR0_Initialize,
-    .Start = TMR0_Start,
-    .Stop = TMR0_Stop,
-    .PeriodCountSet = TMR0_Reload,
-    .TimeoutCallbackRegister = TMR0_OverflowCallbackRegister,
-    .Tasks = TMR0_Tasks
-};
-
-static void (*TMR0_OverflowCallback)(void);
-static void TMR0_DefaultOverflowCallback(void);
+static void (*TMR0_PeriodMatchCallback)(void);
+static void TMR0_DefaultCallback(void);
 
 /**
   Section: TMR0 APIs
 */ 
 
-void TMR0_Initialize(void){
+void TMR0_Initialize(void)
+{
+    TMR0H = (uint8_t)0x4D;                    // Period 2.496ms; Frequency 62500 Hz; Count 77
+    TMR0L = (uint8_t)0x0;
+    
+    T0CON1 = (uint8_t)((2 << _T0CON1_T0CS_POSN)   // T0CS FOSC/4
+        | (4 << _T0CON1_T0CKPS_POSN)   // T0CKPS 1:16
+        | (0 << _T0CON1_T0ASYNC_POSN));  // T0ASYNC synchronised
+    
+    TMR0_PeriodMatchCallback = TMR0_DefaultCallback;
 
-    //TMR0H 77; 
-    TMR0H = 0x4D;
+    PIR0bits.TMR0IF = (uint8_t)0U;
 
-    //TMR0L 0; 
-    TMR0L = 0x0;
+    T0CON0 = (uint8_t)((1 << _T0CON0_T0OUTPS_POSN)   // T0OUTPS 1:2
+        | (1 << _T0CON0_T0EN_POSN)   // T0EN enabled
+        | (0 << _T0CON0_T0MD16_POSN));  // T0MD16 8-bit
+}
 
-    //T0CS FOSC/4; T0CKPS 1:16; T0ASYNC synchronised; 
-    T0CON1 = 0x44;
-
-
-    //Set default callback for TMR0 overflow interrupt
-    TMR0_OverflowCallbackRegister(TMR0_DefaultOverflowCallback);
-
-    //Clear interrupt flag
-    PIR0bits.TMR0IF = 0;
-
-    //T0OUTPS 1:2; T0EN disabled; T016BIT 8-bit; 
-    T0CON0 = 0x1;
+void TMR0_Deinitialize(void)
+{
+    T0CON0bits.T0EN = (uint8_t)0U;
+    
+    PIR0bits.TMR0IF = (uint8_t)0U;	   
+    PIE0bits.TMR0IE = (uint8_t)0U;		
+    
+    T0CON0 = (uint8_t)0x0U;
+    T0CON1 = (uint8_t)0x0U;
+    TMR0H = (uint8_t)0xFFU;
+    TMR0L = (uint8_t)0x0U;
 }
 
 void TMR0_Start(void)
 {
-    T0CON0bits.T0EN = 1;
+    T0CON0bits.T0EN = (uint8_t)1U;
 }
 
 void TMR0_Stop(void)
 {
-    T0CON0bits.T0EN = 0;
+    T0CON0bits.T0EN = (uint8_t)0U;
 }
 
-uint8_t TMR0_Read(void)
+uint8_t TMR0_CounterGet(void)
 {
-    uint8_t readVal;
+    uint8_t counterValue;
 
-    //Read TMR0 register, low byte only
-    readVal = TMR0L;
+    counterValue = TMR0L;
 
-    return readVal;
+    return counterValue;
 }
 
-void TMR0_Write(uint8_t timerVal)
+void TMR0_CounterSet(uint8_t counterValue)
 {
-    //Write to TMR0 register, low byte only
-    TMR0L = timerVal;
+    TMR0L = counterValue;
  }
 
-void TMR0_Reload(size_t periodVal)
+void TMR0_PeriodSet(uint8_t periodValue)
 {
-   //Write to TMR0 register, high byte only
-   TMR0H = (uint8_t)periodVal;
+   TMR0H = periodValue;
 }
 
-
-void TMR0_OverflowCallbackRegister(void (* CallbackHandler)(void))
+uint8_t TMR0_PeriodGet(void)
 {
-    TMR0_OverflowCallback = CallbackHandler;
+    return TMR0H;
 }
 
-static void TMR0_DefaultOverflowCallback(void)
+uint8_t TMR0_MaxCountGet(void)
 {
-    //Add your interrupt code here or
-    //Use TMR0_OverflowCallbackRegister function to use Custom ISR
+    return TMR0_MAX_COUNT;
+}
+
+bool TMR0_PeriodMatchStatusGet(void)
+{
+    return PIR0bits.TMR0IF;
+}
+
+void TMR0_PeriodMatchStatusClear(void)
+{
+    PIR0bits.TMR0IF = (uint8_t)0U;
 }
 
 void TMR0_Tasks(void)
 {
-    if(PIR0bits.TMR0IF)
+    if(1U == PIR0bits.TMR0IF)
     {
-        PIR0bits.TMR0IF = 0;
-        TMR0_OverflowCallback();
+        if(NULL != TMR0_PeriodMatchCallback)
+        {
+            TMR0_PeriodMatchCallback();
+        }
+        PIR0bits.TMR0IF = (uint8_t)0U;
     }
+}
+
+void TMR0_PeriodMatchCallbackRegister(void (* callbackHandler)(void))
+{
+    TMR0_PeriodMatchCallback = callbackHandler;
+}
+
+static void TMR0_DefaultCallback(void)
+{
+    // Default callback
 }

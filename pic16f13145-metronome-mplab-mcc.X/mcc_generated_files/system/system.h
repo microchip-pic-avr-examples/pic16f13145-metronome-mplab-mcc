@@ -9,11 +9,11 @@
  *
  * @version Driver Version 2.0.3
  *
- * @version Package Version 4.1.3
+ * @version Package Version 4.1.4
 */
 
 /*
-© [2024] Microchip Technology Inc. and its subsidiaries.
+© [2026] Microchip Technology Inc. and its subsidiaries.
 
     Subject to your compliance with these terms, you may use Microchip 
     software and any derivatives exclusively with Microchip products. 
@@ -40,14 +40,14 @@
 #include <stdint.h>
 #include <stdbool.h>
 #include "config_bits.h"
-#include "../system/clock.h"
-#include "../clb/clb1.h"
 #include "../system/pins.h"
 #include "../crc/crc.h"
 #include "../nvm/nvm.h"
+#include "../system/interrupt.h"
+#include "../system/clock.h"
+#include "../clb/clb1.h"
 #include "../timer/tmr0.h"
 #include "../timer/tmr1.h"
-#include "../system/interrupt.h"
 
 /**
  * @ingroup systemdriver

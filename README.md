@@ -1,6 +1,12 @@
 <!-- Please do not change this html logo with link -->
 
-<a href="https://www.microchip.com" rel="nofollow"><img src="images/microchip.png" alt="MCHP" width="300"/></a>
+<a target="_blank" href="https://www.microchip.com/" id="top-of-page">
+   <picture>
+      <source media="(prefers-color-scheme: light)" srcset="images/mchp_logo_light.png" width="350">
+      <source media="(prefers-color-scheme: dark)" srcset="images/mchp_logo_dark.png" width="350">
+      <img alt="Microchip Technologies Inc." src="https://www.microchip.com/content/experience-fragments/mchp/en_us/site/header/master/_jcr_content/root/responsivegrid/header/logo.coreimg.100.300.png/1605828081463/microchip.png">
+   </picture>
+</a>
 
 # Metronome Waveform Generator — Use Case for CLB Using the PIC16F13145 Microcontroller With MCC Melody
 
@@ -21,9 +27,11 @@ More details and code examples on the PIC16F13145 can be found at the following 
 
 ## Software Used
 
-- [MPLAB® X IDE v6.20 or newer](https://www.microchip.com/en-us/tools-resources/develop/mplab-x-ide?utm_source=GitHub&utm_medium=TextLink&utm_campaign=MCU8_PIC16F13145&utm_content=pic16f13145-metronome-mplab-mcc-github&utm_bu=MCU08)
-- [MPLAB XC8 v2.46 or newer](https://www.microchip.com/en-us/tools-resources/develop/mplab-xc-compilers?utm_source=GitHub&utm_medium=TextLink&utm_campaign=MCU8_PIC16F13145&utm_content=pic16f13145-metronome-mplab-mcc-github&utm_bu=MCU08)
-- [PIC16F1xxxx_DFP v1.25.389 or newer](https://packs.download.microchip.com/)
+- [MPLAB® X IDE v6.25 or newer](https://www.microchip.com/en-us/tools-resources/develop/mplab-x-ide?utm_source=GitHub&utm_medium=TextLink&utm_campaign=MCU8_PIC16F13145&utm_content=pic16f13145-metronome-mplab-mcc-github&utm_bu=MCU08)
+- [MPLAB XC8 v3.10 or newer](https://www.microchip.com/en-us/tools-resources/develop/mplab-xc-compilers?utm_source=GitHub&utm_medium=TextLink&utm_campaign=MCU8_PIC16F13145&utm_content=pic16f13145-metronome-mplab-mcc-github&utm_bu=MCU08)
+- [PIC16F1xxxx_DFP v1.29.444 or newer](https://packs.download.microchip.com/)
+
+**Important:** The current version features an update to the CLB peripheral, which now includes the CLB Synthesizer Library. For migration details and required changes, refer to the [_Troubleshooting MCC Melody Configurable Logic Block (CLB) Projects Configured With CLB v1.x.x_](https://onlinedocs.microchip.com/oxy/GUID-9438FEC3-C80B-4328-8A8E-2531EDEE6155-en-US-1/index.html) migration guide documentation.
 
 ## Hardware Used
 
@@ -106,38 +114,41 @@ The following peripheral and clock configurations are set up using MPLAB® Code 
     - Clock Divider: 1
     <br><img src="images/mcc_clock_control.png" width="400">
 
-3. CLB1:
-    - Enable CLB: Enabled
-    - Clock Selection: Timer0_Overflow
+3. CLB Synthesizer Library:
     - Clock Divider: Divide clock source by 1
+    - Clock Selection: Timer0_Overflow
+    <br><img src="images/mcc_clb_library.png" width="400"> 
+
+4. CLB1:
+    - Enable CLB: Enabled
     <br><img src="images/mcc_clb.png" width="400"> 
 
-4. TMR0:
-    - Enable Timer: Disabled
-    - Clock Prescaler: 1:16
-    - Clock Postcaler: 1:2
-    - Timer Mode: 8-bit
-    - Clock Source: F<sub>OSC</sub>/4 
+5. TMR0:
+    - Timer Enable: Enabled
+    - Clock Source: F<sub>OSC</sub>/4
     - Enable Syncronisation: Enabled
-    - Requested Period (s): 0.0025
+    - Prescaler: 1:16
+    - Postcaler: 1:2
+    - Timer Mode: 8-bit 
+    - Requested Period: 2.5 ms
     <br><img src="images/mcc_tmr0.png" width="400">
 
-5. TMR1:
+6. TMR1:
     - Enable Timer: Disabled
-    - Clock Selection: TMR0_Overflow
+    - Clock Source: TMR0_Overflow
     - Prescaler: 1:1
-    - Enable Period Count Editor: Enabled
-    - Period Count: 0
-    - TMR Interrupt Enable: Enable
+    - Timer Count Editor Enable: Enabled
+    - Timer Count: 0
+    - TMR Interrupt Enable: Enabled
     <br><img src="images/mcc_tmr1.png" width="400">  
 
-6. CRC:
+7. CRC:
     - Auto-configured by CLB
 
-7. NVM:
+8. NVM:
     - Auto-configured by CLB
 
-8. Pin Grid View:
+9. Pin Grid View:
     - CLBPPSOUT0: RB6 (Contact 1)
     - CLBPPSOUT1: RB5 (Contact 2, 3)
     - CLBPPSOUT2: RB4 (Contact 4)
