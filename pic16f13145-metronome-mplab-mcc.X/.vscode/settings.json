@@ -1,5 +1,4 @@
 {
-    "cmake.sourceDirectory": "C:/Work/NPI/pic16f13145-metronome-mplab-mcc/pic16f13145-metronome-mplab-mcc.X/cmake/pic16f13145-metronome-mplab-mcc/free",
     "memory-inspector.debugTypes": [
         "arm-debugger",
         "embedded-debug",

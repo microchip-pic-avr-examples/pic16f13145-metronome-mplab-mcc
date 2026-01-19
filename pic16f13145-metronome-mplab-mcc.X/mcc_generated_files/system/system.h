@@ -42,7 +42,6 @@
 #include "config_bits.h"
 #include "../system/pins.h"
 #include "../crc/crc.h"
-#include "../nvm/nvm.h"
 #include "../system/interrupt.h"
 #include "../system/clock.h"
 #include "../clb/clb1.h"

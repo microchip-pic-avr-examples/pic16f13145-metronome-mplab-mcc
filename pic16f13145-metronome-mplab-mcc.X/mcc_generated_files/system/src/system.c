@@ -44,7 +44,6 @@ void SYSTEM_Initialize(void)
     TMR0_Initialize();
     TMR1_Initialize();
     CRC_Initialize();
-    NVM_Initialize();
     INTERRUPT_Initialize();
 }
 

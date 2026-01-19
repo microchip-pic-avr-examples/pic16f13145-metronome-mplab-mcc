@@ -8,3 +8,4 @@ associatedIDEProjects:
     - name: pic16f13145-metronome-mplab-mcc
       path: .vscode
       config: free
+      device: PIC16F13145

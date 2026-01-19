@@ -13,9 +13,6 @@
         <logicalFolder name="crc" displayName="crc" projectFiles="true">
           <itemPath>mcc_generated_files/crc/crc.h</itemPath>
         </logicalFolder>
-        <logicalFolder name="nvm" displayName="nvm" projectFiles="true">
-          <itemPath>mcc_generated_files/nvm/nvm.h</itemPath>
-        </logicalFolder>
         <logicalFolder name="system" displayName="system" projectFiles="true">
           <itemPath>mcc_generated_files/system/config_bits.h</itemPath>
           <itemPath>mcc_generated_files/system/interrupt.h</itemPath>
@@ -56,11 +53,6 @@
         <logicalFolder name="crc" displayName="crc" projectFiles="true">
           <logicalFolder name="src" displayName="src" projectFiles="true">
             <itemPath>mcc_generated_files/crc/src/crc.c</itemPath>
-          </logicalFolder>
-        </logicalFolder>
-        <logicalFolder name="nvm" displayName="nvm" projectFiles="true">
-          <logicalFolder name="src" displayName="src" projectFiles="true">
-            <itemPath>mcc_generated_files/nvm/src/nvm.c</itemPath>
           </logicalFolder>
         </logicalFolder>
         <logicalFolder name="system" displayName="system" projectFiles="true">

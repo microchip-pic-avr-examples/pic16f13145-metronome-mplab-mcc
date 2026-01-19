@@ -145,10 +145,7 @@ The following peripheral and clock configurations are set up using MPLAB Code Co
 7. CRC:
     - Auto-configured by the CLB
 
-8. NVM:
-    - Auto-configured by the CLB
-
-9. Pin Grid View:
+8. Pin Grid View:
     - CLBPPSOUT0: RB6 (Contact 1)
     - CLBPPSOUT1: RB5 (Contact 2, 3)
     - CLBPPSOUT2: RB4 (Contact 4)
