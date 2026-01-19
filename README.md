@@ -35,7 +35,7 @@ More details and code examples on the PIC16F13145 can be found at the following 
 
 ## Hardware Used
 
-- The [PIC16F13145 Curiosity Nano Development board](https://www.microchip.com/en-us/development-tool/EV06M52A?utm_source=GitHub&utm_medium=TextLink&utm_campaign=MCU8_PIC16F13145&utm_content=pic16f13145-metronome-mplab-mcc-github&utm_bu=MCU08) is used as a test platform:
+- The [PIC16F13145 Curiosity Nano Development board](https://www.microchip.com/en-us/development-tool/EV06M52A?utm_source=GitHub&utm_medium=TextLink&utm_campaign=MCU8_PIC16F13145&utm_content=pic16f13145-metronome-mplab-mcc-github&utm_bu=MCU08) is used as a test platform
     <br><img src="images/pic16f13145-cnano.png" width="800">
 
 - x27.168 Switec Motor
